@@ -1,0 +1,195 @@
+{
+  "axes": [
+    {
+      "scale": "x",
+      "type": "x"
+    },
+    {
+      "scale": "y",
+      "type": "y"
+    }
+  ],
+  "data": [
+    {
+      "name": "table",
+      "values": [
+        {
+          "col": "data",
+          "idx": "#Barcelona",
+          "val": 68
+        },
+        {
+          "col": "data",
+          "idx": "#Messi",
+          "val": 30
+        },
+        {
+          "col": "data",
+          "idx": "#FCBLive",
+          "val": 17
+        },
+        {
+          "col": "data",
+          "idx": "#UDLasPalmas",
+          "val": 13
+        },
+        {
+          "col": "data",
+          "idx": "#VamosUD",
+          "val": 13
+        },
+        {
+          "col": "data",
+          "idx": "#barcelona",
+          "val": 10
+        },
+        {
+          "col": "data",
+          "idx": "#CopaDelRey",
+          "val": 8
+        },
+        {
+          "col": "data",
+          "idx": "#empleo",
+          "val": 6
+        },
+        {
+          "col": "data",
+          "idx": "#BCN",
+          "val": 6
+        },
+        {
+          "col": "data",
+          "idx": "#riesgoimpago",
+          "val": 6
+        },
+        {
+          "col": "data",
+          "idx": "#news",
+          "val": 5
+        },
+        {
+          "col": "data",
+          "idx": "#LaLiga",
+          "val": 5
+        },
+        {
+          "col": "data",
+          "idx": "#SportsCenter",
+          "val": 4
+        },
+        {
+          "col": "data",
+          "idx": "#LionelMessi",
+          "val": 4
+        },
+        {
+          "col": "data",
+          "idx": "#Informe",
+          "val": 4
+        }
+      ]
+    },
+    {
+      "name": "stats",
+      "source": "table",
+      "transform": [
+        {
+          "keys": [
+            "data.idx"
+          ],
+          "type": "facet"
+        },
+        {
+          "type": "stats",
+          "value": "data.val"
+        }
+      ]
+    }
+  ],
+  "height": 500,
+  "legends": [],
+  "marks": [
+    {
+      "from": {
+        "data": "table",
+        "transform": [
+          {
+            "keys": [
+              "data.col"
+            ],
+            "type": "facet"
+          },
+          {
+            "height": "data.val",
+            "point": "data.idx",
+            "type": "stack"
+          }
+        ]
+      },
+      "marks": [
+        {
+          "properties": {
+            "enter": {
+              "fill": {
+                "field": "data.col",
+                "scale": "color"
+              },
+              "width": {
+                "band": true,
+                "offset": -1,
+                "scale": "x"
+              },
+              "x": {
+                "field": "data.idx",
+                "scale": "x"
+              },
+              "y": {
+                "field": "y",
+                "scale": "y"
+              },
+              "y2": {
+                "field": "y2",
+                "scale": "y"
+              }
+            }
+          },
+          "type": "rect"
+        }
+      ],
+      "type": "group"
+    }
+  ],
+  "padding": "auto",
+  "scales": [
+    {
+      "domain": {
+        "data": "table",
+        "field": "data.idx"
+      },
+      "name": "x",
+      "range": "width",
+      "type": "ordinal",
+      "zero": false
+    },
+    {
+      "domain": {
+        "data": "stats",
+        "field": "sum"
+      },
+      "name": "y",
+      "nice": true,
+      "range": "height"
+    },
+    {
+      "domain": {
+        "data": "table",
+        "field": "data.col"
+      },
+      "name": "color",
+      "range": "category20",
+      "type": "ordinal"
+    }
+  ],
+  "width": 960
+}
