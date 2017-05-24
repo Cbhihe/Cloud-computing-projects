@@ -9,7 +9,7 @@
 #### GitHub url:
 	https://github.com/Cbhihe/clcLab2017.git
 
-### s**Comments:**
+### **Comments:**
 
 #### Cedric Bhihe:
 - Preliminary python program to import Vincent module (task 1)
