@@ -1,12 +1,19 @@
+""" Simple HTTP request handler based on Python SimpleHTTPServer """
+
 #!/usr/bin/env python
-import SimpleHTTPServer
+import SimpleHTTPServer  # module merged in http.server in Py3.
 import SocketServer
 
 class MyRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
-   def do_GET(self):
-      if self.path == '/':
-         self.path = '/ourService.html'
-      return SimpleHTTPServer.SimpleHTTPRequestHandler.do_GET(self)
+""" ---- """
+    # serves files from the current directory and below,
+    # directly mapping the directory structure to HTTP requests.
+
+    def do_GET(self):
+        """ ---- """
+        if self.path == '/':
+            self.path = '/ourService.html'
+        return SimpleHTTPServer.SimpleHTTPRequestHandler.do_GET(self)
 
 Handler = MyRequestHandler
 server = SocketServer.TCPServer(('0.0.0.0', 8954), Handler)
