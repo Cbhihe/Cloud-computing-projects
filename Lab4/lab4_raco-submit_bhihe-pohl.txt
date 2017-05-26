@@ -1,0 +1,30 @@
+﻿## Lab 4 Report
+
+#### Group number: 3
+
+#### Name and email of the members of this group:
+	Toni Pohl toni.polhl@est.fib.upc.edu
+	Cedric Bhihe cedric.bhihe@gmail.com 
+
+#### GitHub url:
+	https://github.com/Cbhihe/clcLab2017.git
+
+### **Comments:**
+
+#### Cedric Bhihe:
+- Preliminary python program to import Vincent module (task 1)
+	found in   ourService_bhihe.py
+- Lab notebook (from task 4.1 until task 4.3)
+	found in   lab4.StudentProposal_bhihe.ipynb, barcelona.json, barcelona.html
+- Lab’s 2 screenshots for task4.3
+	found in lab4.barcelona-tweet-mapping_{1,2}2_bhihe.png
+
+#### Toni Pohl:
+- Preliminary python program to import Vincent module (task 1)
+	found in   ourService_pohl.py
+- Lab notebook (from task 4.1 until 4.2)
+	found in   lab4.Map_pohl.ipynb
+- Lab result (task 4.3)
+	found in   lab4.StudentProposal_pohl.json, Germany.json, Germany.html
+- Lab’s screenshot for task4.3
+	found in lab4.germany-tweet-mapping_11_pohl.png
