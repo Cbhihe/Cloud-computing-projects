@@ -12,10 +12,10 @@ Task 5.1: Install TensorFlow in your local laptop
 
 - Validate your TensorFlow installation (assuming that target directory is ~/tensorflow ):
 
-source ~/tensorflow/bin/activate 
-git clone https://github.com/jorditorresBCN/FirstContactWithTensorFlow-2ndEdition.git
-cd FirstContactWithTensorFlow-2ndEdition/
-python ValidateYourInstallation.py
+Do (only for vigirtual environments):
+    source ~/tensorflow/bin/activate git clone https://github.com/jorditorresBCN/FirstContactWithTensorFlow-2ndEdition.git
+    cd FirstContactWithTensorFlow-2ndEdition/
+    python ValidateYourInstallation.py
 
 If the system outputs the following,
 
