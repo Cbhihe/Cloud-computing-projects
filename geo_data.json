@@ -1,0 +1,75 @@
+{
+    "type": "FeatureCollection", 
+    "features": [
+        {
+            "geometry": {
+                "type": "Point", 
+                "coordinates": [
+                    2.18333, 
+                    41.3833
+                ]
+            }, 
+            "type": "Feature", 
+            "properties": {
+                "text": "Happy Birthday my lil bean \ud83d\udccdEurope wouldn't have been the same with you. \ud83c\udf0f @ Barcelona, Spain https://t.co/BaFrQPxhhG", 
+                "created_at": "Fri Jan 13 18:07:45 +0000 2017"
+            }
+        }, 
+        {
+            "geometry": {
+                "type": "Point", 
+                "coordinates": [
+                    2.17016847, 
+                    41.40082942
+                ]
+            }, 
+            "type": "Feature", 
+            "properties": {
+                "text": "I'm at Goethe Institut Barcelona in Barcelona, Catalunya https://t.co/IwsHYiTlHH", 
+                "created_at": "Fri Jan 13 18:08:10 +0000 2017"
+            }
+        }, 
+        {
+            "geometry": {
+                "type": "Point", 
+                "coordinates": [
+                    44.8604307, 
+                    41.6723053
+                ]
+            }, 
+            "type": "Feature", 
+            "properties": {
+                "text": "Barcelona sack director for comments about Lionel Messi as club struggle to agree new contract\u2026 https://t.co/8HPm0F47ed", 
+                "created_at": "Fri Jan 13 18:13:10 +0000 2017"
+            }
+        }, 
+        {
+            "geometry": {
+                "type": "Point", 
+                "coordinates": [
+                    2.1707001, 
+                    41.3909187
+                ]
+            }, 
+            "type": "Feature", 
+            "properties": {
+                "text": "Thank you for being so nice to us #Barcelona! Home tomorrow. I'll try my best to bring back the\u2026 https://t.co/LjkM4Wzutl", 
+                "created_at": "Fri Jan 13 18:13:14 +0000 2017"
+            }
+        }, 
+        {
+            "geometry": {
+                "type": "Point", 
+                "coordinates": [
+                    2.14803529, 
+                    41.43559647
+                ]
+            }, 
+            "type": "Feature", 
+            "properties": {
+                "text": "#RETENCI\u00d3N nivel AMARILLO en #B20 (pk 12 al 9 norte) BARCELONA #DGTBarcelona #DGT https://t.co/0OjGfZ79ch", 
+                "created_at": "Fri Jan 13 18:14:32 +0000 2017"
+            }
+        }
+    ]
+}
