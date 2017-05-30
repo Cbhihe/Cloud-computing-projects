@@ -5,7 +5,7 @@ import seaborn as sns
 import tensorflow as tf
 
 
-num_points = 5000
+num_points = 10000
 points = []
 
 # Create random data
@@ -24,7 +24,7 @@ for x in range(num_points):
 vectors = tf.constant(points)
 
 # Select random centroids at beginning
-k = 4
+k = 3
 centroids = tf.Variable(tf.slice(
    tf.random_shuffle(vectors), [0, 0], [k, -1]
 ))
