@@ -1,3 +1,4 @@
+""" First steps with TF """
 import tensorflow as tf
 
 a = tf.placeholder("float")
