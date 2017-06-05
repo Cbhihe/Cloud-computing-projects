@@ -1,3 +1,4 @@
+""" GENERATE PLOT, CLOUD OF POINTS and FITTED LINE """
 import numpy as np
 import tensorflow as tf
 import matplotlib.pyplot as plt
@@ -27,8 +28,9 @@ train = optimizer.minimize(loss)
 init = tf.global_variables_initializer()
 
 # Train
-sess = tf.Session()
-sess.run(init)
+sess = tf.Session() # Evaluate `INIT`
+                    # Carry out initialization of global variable(s)
+sess.run(init) 
 for step in range(8):
      sess.run(train)
      print(sess.run(W), sess.run(b))
