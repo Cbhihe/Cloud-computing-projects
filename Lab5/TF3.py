@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-import seaborn as sns
+import seaborn as sbn
 import tensorflow as tf
 
 
@@ -67,5 +67,5 @@ for i in range(len(assignment_values)):
    data["y"].append(points[i][1])
    data["cluster"].append(assignment_values[i])
 df = pd.DataFrame(data)
-sns.lmplot("x", "y", data=df, fit_reg=False, size=6, hue="cluster", legend=False)
+sbn.lmplot("x", "y", data=df, fit_reg=False, size=6, hue="cluster", legend=False)
 plt.show()
