@@ -11,10 +11,9 @@ GitHub url with lab 2 answers: https://github.com/Cbhihe/clcLab.git
 
 Comments:
 
-The following comments were made by Cedric Bhihe: 
+The following comments were made by **Cedric Bhihe**: 
   - I spent an enormous amount of time doing completing this lab, over 11 hours in total.
-
-  - The assignment text should specify very clearly that installation of anaconda3 instead of anaconda2 will lead to endless and tedious corrective measures for the student.
+  - The assignment should specify very clearly that installation of anaconda3 instead of anaconda2 will lead to endless and tedious corrective measures for the student.
  
   - Basically this has been an enormous waste of time for me, mainly because of that problem due to a bad installation choice at the very beginning.
  
