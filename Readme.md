@@ -1,4 +1,4 @@
-## CLC -- Cloud Computing
+﻿## CLC -- Cloud Computing
 
 This repository covers a number of toy projects in the 2017 Cloud-computing class 
 given by Prof. Jordi Torres, Dept of architecture of Computers, Faculty of 
@@ -26,4 +26,4 @@ with the data, irrespectively of whether some  or all of the data has changed.
 Dataset changes over the years are likely to be all or nothing in any case; i.e. 
 a dataset may cease to be available because the website has disappeared, moved 
 or its EULA changed. In such a case you will be left with the code (the cutlery)
-and it filling your plate with suitable food will be your very first step.
+and it filling your plate with suitable food (pertinent data) will be your very first step.
