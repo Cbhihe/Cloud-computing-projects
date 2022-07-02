@@ -1,2 +1,2 @@
-*.ipynb_checkpoints
-*_raco-submit_*.txt
+**/.ipynb_checkpoints/
+**/*_raco-submit_*
