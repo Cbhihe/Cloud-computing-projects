@@ -1,6 +1,6 @@
-.ipynb_checkpoints
+**/*.ipynb_checkpoints
+**/*_raco-submit_*txt
 Lab5/bin
 Lab5/include
 Lab5/lib
 Lab5/pip-selfcheck.json
-**/*_raco-submit_*txt
