@@ -1,60 +1,52 @@
-# Lab 2: Doors in the Cloud
-In this Lab we will discuss the overall structure of a tweet and discuss how to pre-process the text before we can get into some more interesting analysis in the next Lab. In particular, we will see how tokenisation, despite being a well-understood problem, can get tricky with Twitter data. Prior to this, we will  install A Python Development Environment which will be very helpful.
+## Lab 2: APIs as gateways to the Cloud
 
-* [Pre-lab howemork 2](#Prelab)
-   * [HW 2.1: Installing Anaconda](#HW1)
-   * [HW 2.2: Register Our App on Twitter](#HW2)  
-* [Tasks Lab 2](#Tasks)
-   * [Task 2.1: Get Started with NLTK](#NLTK)
-   * [Task 2.2: Getting Started with `tweepy`](#tweepy)  
-   * [Task 2.3:  Tweet pre-processing](#preproc)  
+In this Lab we will discuss the overall structure of a tweet and discuss how to pre-process the text before we can get into some more interesting analysis in the next Lab. In particular, we will see how tokenisation, despite being a well-understood problem, can get tricky with Twitter data. Prior to this, we will  install a special Python development environment.
 
+* Pre-lab Tasks
+   * PL task 1: Install Anaconda
+   * [PL task 2: Register your App on Twitter
+* Lab Tasks
+   * Task 1: Get Started with NLTK
+   * Task 2: Getting Started with `tweepy`
+   * Task 3: Tweet pre-processing
 
-<a name="Prelab"/>
+An API provides a way for computer systems to interact with each other. There are many types of APIs. Every programming language has a built-in API that it used to write programs. Operating systems themselves have APIs used by programs to open files or draw text on the screen. Many APIs are built with web technologies, e.g. HTTP, in mind. . We will refer to this type of API as web API, an interface to either a web server or a web browser. These APIs are used extensively for the development of web applications and work often in the Cloud, at either the server end or the client end. 
 
-#  Pre-lab homework 2
+Web APIs are a key component to be able to access Cloud platforms programmatically. Many Cloud applications provide an API that allows developers to integrate their own code with these applications, taking advantage of the services' functionality in their own apps.  The Twitter API, for instance, permits access to the tweets sent by any specific user, those containing a specific keyword or even a combination of KWs, those sent on a specific topic, within a particular time window, etc.
 
-<a name="HW1"/>
+In order to access Twitter data programmatically, we will create an account and then a small app that will interact with the Twitter API.  A preliminary step is to implement OAuth (Open Authorization) as its standard authentication mechanism.  We need four primary identifiers for an OAuth workflow:
 
-## HW 2.1: Installing Anaconda
-Download and installing Anaconda in your laptop following hands-on 4 ([Python Development Environment Quick Start](https://github.com/jorditorresBCN/Quick-Start/blob/master/Python-Development-Environment-Quick-Start.md)) guidelines. Start a Jupyter notebook on your terminal and create a note book that contains your previous [`Lab1.guessnumber.py`](https://github.com/jorditorresBCN/Assignments-2017/blob/master/Lab01.md) code including some explanation of your steps using `markdown` cells. Save your notebook as `Lab2.guessnumber.ipynb` and add it to your remote GitHub repository.
+* consumer key, 
+* consumer secret, 
+* access token, and 
+* access token secret. 
+**Warning**: These are application settings that should always be kept private.
 
-<a name="HW2"/> 
+Luckily, the Python ecosystem has already well-established libraries for most social media platforms, that come with an implementation of those platform’s authentication processes.
 
-## HW 2.2: Register Our App on Twitter  
-Cloud applications are characterized by an increased focus on user participation and content creation, but also by a deep interaction and interconnection of applications sharing con-tent from different types of services in order to integrate multiple systems together. This scenario is, doubtlessly, possible thanks to the rise of  the “Application Programming Interfaces” (API). 
-
-An API, or Application Programming Interface, provide a way for computer systems to interact with each other. There are many types of APIs. Every programming language has a built-in API that it used to write programs. For instance, you studied in previous courses that operating systems themselves have APIs used by programs to open files or draw text on the screen. 
-Due this course is centered in the Cloud, we are going to focus on API that are built with web technologies as HTTP. We will refer to this type of API as web API, an interface to either a web server or a web browser. These APIs are used extensively for the development of web applications and work at either the server end or the client end. 
-Web APIs are a key component into today Cloud era. Many cloud applications provide an API that allows developers to integrate their own code with these applications, taking ad-vantage of the services' functionality in their own apps.
-
-One example amount the vast number of available one is Twitter API. Twitter API allows to access all tweets made by any user, the tweets containing a particular term or even a combination of terms, tweets done on the topic in a particular date range, etc.
-
-
-In order to set up our Lab 2 to access Twitter data, there are some preliminary steps. Twitter implements OAuth (called Open Authorization) as its standard authentication mechanism, and in order to have access to Twitter data programmatically, we need to create an app that interacts with the Twitter API. There are four primary identifiers  we will need to note for an OAuth workflow: consumer key, consumer secret, access token, and access token secret. A good new from developer's perspective is that the Python ecosystem has already wellestablished libraries for most social media platforms, which come with an implementation of the authentication process.
-
-The first step in this homework is the registration of your app. In particular, you need to point your browser to http://apps.twitter.com, log-in to Twitter and register a new application. You will receive a **Consumer Key** and a **Consumer secret**. From the configuration page "Keys and Access Token" of your app, you can also obtain the **Access Token** and a **Access Token Secret**. Save this information to perform the following Lab session.
-
-> **Warning**: these are application settings that should always be kept private.
-
+The first step in this homework is therefore the registration of your app. In particular, you need to point your browser to `http://apps.twitter.com`, log-in to Twitter and register a new application. You will receive a **Consumer Key** and a **Consumer secret**. From the configuration page "Keys and Access Token" of your App, you can also obtain the **Access Token** and a **Access Token Secret**. Save this information so you can keep up with your lab tasks.<BR>
 Note that you will need a Twitter account in order to login, create an app, and get these credentials.
 
-<a name="Tasks"/>
+###  Pre-lab
+#### PL task 1: Install Anaconda
+Download and install Anaconda in your local host following Tutorial 4 ([Python Development Environment Quick Start](https://github.com/jorditorresBCN/Quick-Start/blob/master/Python-Development-Environment-Quick-Start.md)). Start a Jupyter notebook on your terminal and create a notebook that contains your previous [`guess_nbr.py`](https://github.com/jorditorresBCN/Assignments-2017/blob/master/Lab01.md) code including some explanation of your steps using `markdown` cells. Save your notebook as `guess_nbr.ipynb` and add it to your remote Git repo.
 
-#  Tasks of Lab 2
+#### PL-task 2: Register your App on Twitter  
+Cloud applications are characterized by an increased focus on user participation and content creation. There are also interactions and interconnections between applications sharing content from different types of services.  In order to show how to integrate multiple systems together, we focus on a few “Application Programming Interfaces” (API).
 
-<a name="NLTK"/>
+### Lab Tasks
 
-## Task 2.1: Get Started with NLTK
-One of the most popular packages in Python for NLP is Natural Language Toolkit ([NLTK](http://www.nltk.org). The toolkit provides a friendly interface for many of the common NLP tasks, as well as lexical resources and linguistic data.
+#### Task 1: Get Started with NLTK
+One of the most popular packages in Python for NLP is the Natural Language ToolKit ([NLTK](http://www.nltk.org)). The toolkit provides a friendly interface for many of the common NLP tasks, as well as lexical resources and linguistic data.
 
-Tokenisation is one of the most basic, yet most important, steps in text analysis required in the following task. The purpose of tokenisation is to split a stream of text into smaller units called tokens, usually words or phrases. For this purpouse we will use the [NLTK](http://www.nltk.org) Python Natural Language Processing Toolkit:
+Tokenization is one of the most basic, yet most important, steps in text analysis required in the following task. The purpose of tokenization is to split a stream of text into smaller units called tokens, usually made up of words. For this purpose, we will use NLTK.
+
 ```
 import nltk
 ```
-A difference between NLTK and many other packages is that this framework also comes with linguistic data for specific tasks. Given their size, such data is not included in the default installation, but has to be downloaded separately. For this reason, after importing NLTK, we need download NLTK Data which include a lot of corpora, grammars, models and etc. You can find the complete nltk data list [here](http://nltk.org/nltk_data/). You can downloaded all nltk resources by `nltk.download('all')` but it takes ~3.5G. For english text we could use `nltk.download('punkt')` to download the NLTK data package that includes a pre-trained tokenizer for English.
+A difference between NLTK and many other packages is that this framework also comes with linguistic data for specific tasks. Given their size, such data is not included in the default installation, but has to be downloaded separately. For this reason, after importing NLTK, we need download NLTK Data which include a lot of corpora, grammars, models, etc. You can find the complete nltk data list [here](http://nltk.org/nltk_data/). You can downloaded all nltk resources by `nltk.download('all')` but it takes ~3.5G. For english text we could use `nltk.download('punkt')` to download the NLTK data package that includes a pre-trained tokenizer for English.
 
-Let’s see the example using the NLTK to tokenise the book [First Contact with TensorFlow](http://www.jorditorres.org/Tensorflow)  (`FirstContactWithTensorFlow.txt`could be downloaded from this github) and outputs the 10 most common words in the book.
+Let’s see the example using the NLTK to tokenize the book [First Contact with TensorFlow](http://www.jorditorres.org/Tensorflow)(`FirstContactWithTensorFlow.txt`could be downloaded from this github) and outputs the 10 most common words in the book.
 ```
 import nltk
 nltk.download('punkt') 
@@ -72,14 +64,14 @@ tokens = get_tokens()
 count = Counter(tokens)
 print count.most_common(10)
 ```
-### Task 2.1.1: Word Count 1
+##### Task 1.1: Word Count 1
 Create a notebook with the name `Lab2.WordCountWithNLTK.ipynb`, that computes and prints the 10 most common words in the book.
 
-### Task 2.1.2: Word Count 2
+##### Task 1.2: Word Count 2
 Add a new code cell into the same notebook with the code that computes and prints the total number of word of this book.   
 
 
-### Task 2.1.3: Remove puntuation
+##### Task 1.3: Remove puntuation
 We can see that punctiation are many of the most common words. We can remove the punctuation using the character deletion step of translate method as:
 
 ```
@@ -89,7 +81,7 @@ We can see that punctiation are many of the most common words. We can remove the
 ```
 Add a new code cell to the same notebook with the code (and the comments with markdown cells if you consider interesting) that computes and prints the 10 most common words without punctuation characters. 
     
-### Task 2.1.4: Stop Words
+##### Task 1.4: Stop Words
 Is not "Tensorflow" the most commond word? Why? What are Stop Words? Include your answer in a markdown cells in the same notebook.
 
 When we are working with text mining applications, we often hear of the term “Stop Word Removal". We can do it using the same `nltk` package: 
@@ -101,21 +93,19 @@ count = Counter(filtered)
 ```
 Add a new code cell to the same notebook with the code (and the comments with markdown cells if you consider interesting)  that computes and prints the 10 most common word after removing the stop words.  Now it make more sense, right? "TensorFlow" is the most common word!
 
-<a name="tweepy"/>
-
-## Task 2.2: Getting Started with `tweepy`  
+#### Task 2: Getting Started with `tweepy`
 
 In this task we will use `tweepy` package as a tool to access Twitter data in a fairly easy way with Python. There are different types of data we can collect, however we will focus on the “tweet” object.
 
-### Task 2.2.1: The Twitter API
-As a [homework](#HW1) we already register Our App on Twitter in order to set up our project to access Twitter data. However, the Twitter API limits access to applications. You can find more detail in [the official documentation](https://dev.twitter.com/rest/public/rate-limiting). It's also important to consider that [different APIs have different rate limits](https://dev.twitter.com/rest/public/rate-limiting). The implications of hitting the API limits is that Twitter will return an error message rather than the data we are asking for. Moreover, if we continue performing more requests to the API, the time required to obtain regular access again will increase as Twitter could flag us as potential abusers. If our application needs many API requests we can use the `time` module (`time.sleep()` function). 
+##### Task 2.1: The Twitter API
+We already registered our App on Twitter in order to access Twitter data. However, the Twitter API limits access to applications. You can find more detail in [the official documentation](https://dev.twitter.com/rest/public/rate-limiting). Generally different APIs have different [rate limits](https://dev.twitter.com/rest/public/rate-limiting). The implications of hitting the API limits is that Twitter will return an error message rather than the data for which we ask. Ignoring such an error message and performing more requests to the API, may lengthen the time required to obtain a renewed regular access.  Twitter may also flag you as a potential abuser.  If your application needs many API requests pace it the best you can, e.g. with the `time` library and its (`time.sleep()` method. 
 
-Another important thing before to start is to know that we have two classes of API: **REST APIs** and **Streaming API**. All the REST APIs only allow you to go back in time (tweets that have already been published). Often these APIs limit the amount of tweets you can retrieve, not just in terms of rate limits as we mentioned, but also in terms of time span. In fact, it's usually possible to go back in time up to approximately one week. Also another aspect to consider about the REST API is that they are not guaranteed to provide all the tweets published on Twitter. 
+There are two types of Twitter APIs: a **REST API** and a **Streaming API**. 
+- The Twitter REST API only allows you to go back in time and to mine tweets that have already been published. The API may limit the amount of tweets you can retrieve, not just in terms of rate limits as mentioned, but also in terms of time span. In fact, it's usually only possible to go back in time up to approximately one week on Twitter. The REST API offer no guarantee when you need to mine Twitter exhaustively.   A REST API is generally useful when we want to search for tweets authored by a specific user or when we need to access our own timeline.
 
-On the other hand, the Streaming API looks into the future, we can retrieve all the tweets that match our filter criteria, as they are published. The Streaming API is useful when we want to filter a particular keyword and download a massive amount of tweets about it, While the REST APIs are useful when we want to search for tweets authored by a specific user or we want to access our own timeline.
+- Streaming APIs looks into the future. They retrieve any tweet  as they are published, as long as they match your criteria.  They are useful when we want to filter a particular keyword and download a massive amount of tweets about it.
 
-
-### Task 2.2.2: Accessing your twitter account information  
+##### Task 2.2: Accessing your twitter account information 
 
 In order to interact with the Twitter APIs, we need a Python client that implements the different calls to the API itself. There are several options as we can see from the [official documentation](https://dev.twitter.com/resources/twitter-libraries). We will chose for this lab [Tweepy](http://tweepy.readthedocs.io/en/v3.5.0/).
 The easiest way to install the latest version is by using pip/easy_install to pull it from [PyPI](https://pypi.python.org/pypi) to your local directory:
@@ -167,7 +157,7 @@ print('Description: ' + str(user.description))
 ```
 Is the data printed correctly? Is it yours? 
 
-### Task 2.2.3: Accessing Tweets  
+##### Task 2.3: Accessing Tweets
 Tweepy provides the convenient Cursor interface to iterate through different types of objects. For example, we can read our own Twitter home timeline with (we are using 1 to limit the number of tweets we are reading and only reading the `text` of the tweet):
 
 ```
@@ -287,14 +277,3 @@ In this example, the regular expressions are compiled with the flags re.VERBOSE,
 Keep track of your executions with different fictitious tweets and comments in the `Lab2.TokenizeTweetText.ipynb` notebook.
 
 Now, we are ready for next Lab, where we will mining streaming twitter data.
-
-
-# How to Submit this Assignment:  
-Be sure that you have updated your remote github repository (using the `git`commands `add`, `commit` and `push`) with all the Lab `.ipynb` files generated along this Lab. Submit **before the deadline** to the *RACO Practicals section* a "Lab2.txt" file including: 
-
-1. Group number
-2. name and email of the members of this group
-3. github url that contains your lab answers (the same as Lab1)
-5. add any comment that you consider necessary.
-
-

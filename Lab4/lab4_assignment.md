@@ -1,16 +1,12 @@
-# Lab 4: Interacting with users and services in the Cloud
+## Lab 4: Interacting with users and services in the Cloud
 
-* [Task 4.1: How to provide your services through an API?](#Tasks41)
-* [Task 4.2: How to provide our service combined with third-party services?](#Tasks42)  
-* [Task 4.3: Student proposal](#Tasks43)  
-* [Task 4.4: Using Advanced Analytics as a Service in the Cloud (Optional - 5%) ](#Tasks44)  
-   
-<a name="Tasks41"/>
+* Task 4.1: How to provide your services through an API?
+* Task 4.2: How to provide our service combined with third-party services?
+* Task 4.3: Student proposal
+* Task 4.4: Using Advanced Analytics as a Service in the Cloud (Optional - 5%)
 
-#  Tasks of Lab 4
-<a name="Tasks41"/>
-
-## Task 4.1:  How to provide your services through an API?
+### Lab Tasks
+#### Task 1:  How to provide your services through an API?
 As we show, we can plots in Python using libraries like matplotlib.  However, how to provide our results through an API to consumers?
 If you want to use python to build a prototype server (of your service) and want to provide web-base API with minimal efforts, you can just use python `SimpleHTTPServer` and `SocketServer` packages. 
 
@@ -101,7 +97,7 @@ Before starting the next [task 4.2](#Tasks42), create a `.pynb` file that demons
 
 <a name="Tasks42"/>
 
-## Task 4.2: How to provide our service combined with third-party services?
+#### Task 2: How to provide our service combined with third-party services?
 
 In order to augment the value of our service we can build our service upon other services. As a example of combining our service with third-party services I suggest to plotting tweets on a map. Twitter allows its users to provide their location when they publish a tweet, in the form of latitude and longitude coordinates. With this information, we are ready to create some nice visualisation for our data, in the form of interactive maps. 
 However the problem in our Twitter case is that we can find details about the geographic localization of the user's device in the form of geographic coordinates only in a small portion of tweets. Many users disable this functionality on their mobile, however there is still some tweets tagged with this information and allow us to show an example of using a third-party services that allows a nice way to provide an easy-to-digest of a particular feature of a dataset. 
@@ -266,15 +262,13 @@ As you can look, in our example we have few geolocated tweets. However, the code
 
 <a name="Tasks43"/>
 
-## Task 4.3: Student proposal
+#### Task 3: Student proposal
 
 We are asking to the student to reproduce the steps described in the previous tasks in their dataset generated in Lab 3. Visit the [Leaflet Quick Start Guide](http://leafletjs.com/examples/quick-start/) for more details about the `html` file and  how `Leaflet.js` can be used. 
 
 Create a `.pynb` file with markdown cells describing the program steps and the characteristics of the dataset created (e.g. the time frame for the download, etc.).
 
-<a name="Tasks44"/>
-
-## Task 4.4:  Using Advanced Analytics as a Service in the Cloud (Optional - 5%) 
+#### Task 4:  Using Advanced Analytics as a Service in the Cloud (Optional - 5%) 
 As an "optional" task (only 5% of the lab grade), for students that want to go in more deep, we suggest to use the [Cloud Vision API](https://cloud.google.com/vision/) from Google to detect text within images as an example of Advanced Analytics as a Service in the Cloud.  This hands-on follows https://github.com/GoogleCloudPlatform/cloud-vision/tree/master/python/text. This hands-on detect text within images, stores this text in an index, and then lets you query this index.
 
 [Cloud Vision API](https://cloud.google.com/vision/) enables developers to understand the content of an image by encapsulating powerful machine learning models in an easy to use REST API. It quickly classifies images into thousands of categories (e.g., "sailboat", "lion", "Eiffel Tower"), detects individual objects and faces within images, and finds and reads printed words contained within images. You can build metadata on your image catalog, moderate offensive content, or enable new marketing scenarios through image sentiment analysis. Analyze images uploaded in the request or integrate with your image storage on Google Cloud Storage. Try the API [here (Drag image file here or Browse from your computer)](https://cloud.google.com/vision/).

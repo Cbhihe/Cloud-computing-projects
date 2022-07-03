@@ -1,0 +1,346 @@
+﻿File name: lab2-report.txt
+
+
+
+CELL 1   TASK 0: ANACONDA2 BASED JUPYTER NOTEBOOK TEST
+
+""" Lab1.guessnumber.py based on Python v2.7  """
+
+import random
+import io
+
+# State constants
+ABORTED = 0
+GUESSED_RIGHT = 1
+GUESSED_WRONG = 2
+
+# Guess boundaries
+MIN_GUESS = 1
+MAX_GUESS = 20
+
+# Format the question text
+QUESTION = "Guess a number between {} and {}: ".format(MIN_GUESS, MAX_GUESS)
+
+# init the random number
+# Outside a block or a definition the variable name should be capitalized.
+GUESS_NUM = random.randint(MIN_GUESS, MAX_GUESS)
+
+# Starts the game
+# Returns True if guessed correctly else false
+def game_round():
+    """ --- """
+    try:
+        inputstring = raw_input(QUESTION)
+
+        # Abort
+        if inputstring == "exit":
+            return ABORTED
+
+	# parse guess
+        guess = int(inputstring)
+
+	# Guess out of boundaries
+        if guess < MIN_GUESS or guess > MAX_GUESS:
+            return GUESSED_WRONG
+
+	# Guess too high
+        if guess > GUESS_NUM:
+            print "Your guessed number is too high."
+            return GUESSED_WRONG
+
+	# Guess too low
+        if guess < GUESS_NUM:
+            print "Your guessed number is too low."
+            return GUESSED_WRONG
+
+    except ValueError:
+        # Handle any ValueError exception
+        print "Write a valid integer."
+        return GUESSED_WRONG
+
+    return GUESSED_RIGHT
+
+# The game function
+def game():
+    """ --- """
+    state = GUESSED_WRONG
+    while state == GUESSED_WRONG:
+        state = game_round()
+
+        if state == ABORTED:
+            print "Thanks for playing! Good luck next time!"
+        elif state == GUESSED_RIGHT:
+            print "You guessed {} well!".format(GUESS_NUM)
+
+# Only runs game() if script is executed directly by passing it
+#   as cmd to python interpreter
+# Only if file is executed directly, is __name__ set to __main__
+if __name__ == "__main__":
+    print "Welcome to \"Guess the number!\"\nTo abort the game write \"exit\"."
+game()
+
+Welcome to "Guess the number!"
+To abort the game write "exit".
+Guess a number between 1 and 20: 10
+Your guessed number is too low.
+Guess a number between 1 and 20: fsfs
+Write a valid integer.
+Guess a number between 1 and 20: 15
+Your guessed number is too high.
+Guess a number between 1 and 20: 13
+Your guessed number is too high.
+Guess a number between 1 and 20: 11
+You guessed 11 well!
+
+
+CELL 2   TASK 2.1.1: 10 most common tokens in text, punctuation included
+
+import nltk
+nltk.download('punkt') 
+import string
+import io
+
+from collections import Counter
+
+def get_tokens():
+   with open('/home/ckb/Study/UPC/Subjects/CLC_cloud-computing/Labs/Lab2/FirstContactWithTensorFlow.txt', 'r') as tf:
+    text = tf.read()
+    tokens = nltk.word_tokenize(text)
+    return tokens
+
+tokens = get_tokens()
+count = Counter(tokens)
+print "10 most common tokens in text: {}".format(count.most_common(10))
+
+[nltk_data] Downloading package punkt to /home/ckb/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+10 most common tokens in text: [('the', 1343), (',', 1251), ('.', 810), (')', 638), ('(', 637), ('of', 586), ('to', 491), ('a', 468), (':', 454), ('in', 417)]
+
+
+CELL 3   Nbr of signs in text and sorted list of signs used at least once, including punctuation and spaces
+
+""" Nbr of signs in text and sorted list of signs used at least once, including punctuation and spaces """
+import nltk
+nltk.download('punkt') 
+import string
+import io
+
+from collections import Counter
+
+def count_signs():
+   """ Counts number of signs including spaces. Also counts number of different signs but ignoring case """
+
+   with open('/home/ckb/Study/UPC/Subjects/CLC_cloud-computing/Labs/Lab2/FirstContactWithTensorFlow.txt', 'r') as tf:
+       text = tf.read()
+       sign_count = len(text)
+       # count number of spaces used in text
+       space_count = text.count(' ')
+       sign_type_count = len(set(text.lower()))
+       sign_set = set(text.lower())
+       return sign_count, space_count, sign_type_count, sign_set
+
+nbr_signs, nbr_spaces, nbr_sign_types, sign_set = count_signs()
+
+print "Number of signs (w/ spaces, w/ punctuation): {}".format(nbr_signs)
+print "Number of signs (w/o space, w/ punctuation): {}".format(nbr_signs - nbr_spaces)
+print "Number of sign types (ignoring case): {}".format(nbr_sign_types)
+print "Sorted set of signs used in text at least once (ignoring case):\n",sorted(sign_set)
+
+[nltk_data] Downloading package punkt to /home/ckb/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+Number of signs (w/ spaces, w/ punctuation): 134377
+Number of signs (w/o space, w/ punctuation): 112523
+Number of sign types (ignoring case): 69
+Sorted set of signs used in text at least once (ignoring case):
+['\n', ' ', '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';', '<', '=', '>', '?', '[', ']', '^', '_', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '{', '}', '~', '\xbb', '\xbf', '\xef']
+
+
+CELL 4   Token stats
+
+""" Token stats: 1) case sensitive, w/ punctuation, 2) case insensitive, w/o punctuation """
+import nltk
+nltk.download('punkt') 
+import string
+import io
+
+from collections import Counter
+
+def get_tokens():
+    """ Counts tokens w/o punctuation.”””
+    # Case sensitive and case insensitive parsing.
+    with open('/home/ckb/Study/UPC/Subjects/CLC_cloud-computing/Labs/Lab2/FirstContactWithTensorFlow.txt', 'r') as tf:
+        text = tf.read()
+        tokens_1 = nltk.word_tokenize(text)
+        lowers = text.lower()
+        no_punctuation = lowers.translate(None, string.punctuation)
+        tokens_2 = nltk.word_tokenize(no_punctuation)
+        return tokens_1, tokens_2
+
+tokens_1, tokens_2 = get_tokens()
+count_1 = Counter(tokens_1)
+count_2 = Counter(tokens_2)
+print "Token stats (case sensitive, with punctuation): {}".format(len(count_1.most_common()))
+print count_1.most_common()
+print " ------------------ "
+print "Token stats (case insensitive, w/o punctuation):  {}".format(len(count_2.most_common()))
+print count_2.most_common()
+
+[nltk_data] Downloading package punkt to /home/ckb/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+Token stats (case sensitive, with punctuation): 3389
+[('the', 1343), (',', 1251), ('.', 810), (')', 638), ('(', 637), ('of', 586), ('to', 491), ('a', 468), (':', 454), ('in', 417), ('and', 342), ('is', 290), ('that', 272), (']', 269), ('[', 262), ('we', 251), ('this', 231), ('with', 189), ('=', 180), ('TensorFlow', 173), ('as', 160), ('for', 141), ('can', 139), ('I', 123), ('will', 120), ('it', 112), ('be', 106), ('have', 105), ('are', 104), ('The', 101), ("''", 100), ('data', 97), ('on', 91), ('tensor', 89), ('at', 89), ('code', 88), ('``', 87), ('1', 86), ('In', 85), ('each', 80), ('our', 77), ...]
+ ------------------ 
+Token stats (case insensitive, w/o punctuation): 3114
+[('the', 1444), ('of', 586), ('to', 531), ('in', 506), ('a', 481), ('and', 346), ('is', 289), ('we', 279), ('that', 275), ('this', 268), ('with', 201), ('tensorflow', 193), ('as', 190), ('for', 175), ('can', 139), ('i', 130), ('it', 121), ('will', 120), ('be', 109), ('are', 105), ('have', 104), ('data', 102), ('tensor', 99), ('on', 94), ('at', 94), ('code', 90), ('each', 82), ('learning', 81), ('an', 81), ('our', 77), ('by', 74), ('function', 74), ('one', 73), ('which', 73), ('use', 65), ('example', 64), ('available', 63), ('1', 61), ('b', 59), ('layer', 59), ('model', 58), ('from', 54), ('chapter', 52), ('you', 51), ('neural', 51), ('case', 50), ('w', 50), ('book', 50), ('how', 49), ('more', 49), ('algorithm', 48), ('dimension', 47), ('first', 46), ('using', 46), ('all', 46), ('has', 45), ('if', 44), ('values', 44), ('accessed', 44), ('online', 43), ('deep', 42), ('reader', 41), ('also', 40), ('2016', 39), ('value', 39), ('following', 38), ('2', 38), ('y', 38), ('training', 37), ('or', 37), ('step', 37), ('0', 36), ('not', 36), ('two', 36), ('but', 36), ('when', 35), ('these', 34), ('its', 34), ('some', 34), ('into', 34), ('input', 33), ('tensors', 33), ('new', 31), ('operations', 31), ('image', 31), ('only', 30), ('parameters', 30), ('like', 30), ('network', 29), ('points', 29), ('time', 29), ('see', 29), ('machine', 28), ('given', 28), ('previous', 28), ('github', 28), ('import', 28), ('there', 28), ('error', 28), ('line', 28), ('networks', 28), ('size', 27), ('x', 27), ('them', 26), ('variables', 26), ('same', 26), ('output', 26), ('their', 26), ...]
+
+
+CELL 5   TASK 2.1.2 (FAULTY): case insensitive word count (no punctuation)
+
+""" case insensitive word count (no punctuation) """
+import nltk
+nltk.download('punkt') 
+import string
+import io
+
+from collections import Counter
+
+def get_words():
+    """ Counts words. Case insensitive parsing, w/o punctuation. """
+    # _CAUTION: Does NOT discriminate multiple spaces !!!_
+    with open('/home/ckb/Study/UPC/Subjects/CLC_cloud-computing/Labs/Lab2/FirstContactWithTensorFlow.txt', 'r') as tf:
+        wordcount_np = 0
+        text = tf.read()
+        text_lower = text.lower()
+        text_np = text_lower.translate(None, string.punctuation) 
+        wordcount = len(text_np.split(" "))
+        return wordcount
+
+wordcount = get_words()
+print "The number of words (case insensitive, w/o punctuation) is: {}".format(wordcount)
+
+[nltk_data] Downloading package punkt to /home/ckb/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+The number of words is: 21855   ( ← wrong answer)
+
+CELL 6   TASK 2.1.2 (CORRECT): case insensitive word count (no punctuation)
+
+""" case insensitive word count (no punctuation) """
+import nltk
+nltk.download('punkt') 
+import string
+import io
+
+from collections import Counter
+
+def get_words():
+    """ Counts words. Case insensitive parsing, without punctuation. """
+    # _ CAUTION: Does NOT discriminate multiple spaces !!! _
+    with open('/home/ckb/Study/UPC/Subjects/CLC_cloud-computing/Labs/Lab2/FirstContactWithTensorFlow.txt', 'r') as tf:
+        wordcount_np = 0
+        text = tf.read()
+        text_lower = text.lower()
+        text_np = text_lower.translate(None, string.punctuation)
+        # replace multiple whitespaces with single space, replaces tab,
+        # eol, trailing space, etc. with single space
+        text_np_nms = ' '.join(text_np.split())
+        # there is one more word than whitespaces
+        wordcount = len(text_np_nms.split(" ")) + 1
+        return wordcount
+
+wordcount = get_words()
+print "The number of words (case insensitive, w/o punctuation) is: {}".format(wordcount)
+
+[nltk_data] Downloading package punkt to /home/ckb/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+The number of words is: 19590   ( ← good answer)
+
+CELL 7   TASK 2.1.2 (ELEGANT): case insensitive word count (no punctuation)
+
+""" case insensitive word count (no punctuation) """
+import nltk
+nltk.download('punkt') 
+import string
+import io
+
+from collections import Counter
+
+def get_words():
+    """Counts words. Case insensitive parsing, w/o punctuation."""
+    with open('/home/ckb/Study/UPC/Subjects/CLC_cloud-computing/Labs/Lab2/FirstContactWithTensorFlow.txt', 'r') as tf:
+        text = tf.read()
+        lowers = text.lower()
+        no_punctuation = lowers.translate(None, string.punctuation)
+        tokens_np = nltk.word_tokenize(no_punctuation)
+        return tokens_np
+
+# print tokens_np
+tokens = get_words()
+tokencount = Counter(tokens)
+
+print “The number of words is: “ 
+print reduce(lambda counter, token_occurence: counter + token_occurence[1], tokencount.most_common(),0)
+
+[nltk_data] Downloading package punkt to /home/ckb/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+The number of words is: 19590   ( ← good answer)
+
+
+CELL 8   TASK 2.1.3: 10 most common tokens (case insensitive, no punctuation)
+
+""" Task 2.1.3: 10 most common words (case insensitive, no punctuation) """
+
+import nltk
+nltk.download('punkt')
+
+from collections import Counter
+
+def get_tokens():
+    """ Case insensitive parsing - no punctuation """
+    with open('/home/ckb/Study/UPC/Subjects/CLC_cloud-computing/Labs/Lab2/FirstContactWithTensorFlow.txt', 'r') as tf:
+        text = tf.read()
+        lowers = text.lower()
+        no_punctuation = lowers.translate(None, string.punctuation)
+        tokens_np = nltk.word_tokenize(no_punctuation)
+        return tokens_np
+
+tokens = get_words()
+tokencount = Counter(tokens)
+print "The 10 most common tokens are: {}".format(tokencount.most_common(10))
+
+[nltk_data] Downloading package punkt to /home/ckb/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+The 10 most common tokens are: [('the', 1444), ('of', 586), ('to', 531), ('in', 506), ('a', 481), ('and', 346), ('is', 289), ('we', 279), ('that', 275), ('this', 268)]
+
+
+CELL 9   TASK  2.1.4: 10 most common tokens supressing stop-words, punctuation
+
+import nltk
+nltk.download('punkt') 
+import string
+import io
+
+from collections import Counter
+from nltk.corpus import stopwords
+
+def get_words():
+    """Counts words.”””
+    # Case insensitive parsing, no punctuation, no stop words
+    with open('/home/ckb/Study/UPC/Subjects/CLC_cloud-computing/Labs/Lab2/FirstContactWithTensorFlow.txt', 'r', encoding='utf-8') as tf:
+        text = tf.read()
+        lowers = text.lower()
+        # no_punctuation = lowers.translate(string.maketrans("",""), string.punctuation)
+        no_punctuation = lowers.translate(None, string.punctuation)
+        tokens_np = nltk.word_tokenize(no_punctuation)
+        return tokens_np
+
+tokens = get_words()
+filtered = [w for w in tokens if not w in stopwords.words('english')]
+tokencount = Counter(filtered)
+
+print "The 10 most common words (w/o stop-words) are: {}".format(tokencount.most_common(10))
+
+[nltk_data] Downloading package punkt to /home/ckb/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+/home/ckb/anaconda2/lib/python2.7/site-packages/ipykernel_launcher.py:20: UnicodeWarning: Unicode equal comparison failed to convert both arguments to Unicode - interpreting them as being unequal
+The 10 most common words (w/o stop-words) are: [('tensorflow', 193), ('data', 102), ('tensor', 99), ('code', 90), ('learning', 81), ('function', 74), ('one', 73), ('use', 65), ('example', 64), ('available', 63)]
+

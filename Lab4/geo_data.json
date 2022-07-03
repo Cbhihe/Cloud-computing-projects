@@ -1,0 +1,75 @@
+{
+    "type": "FeatureCollection", 
+    "features": [
+        {
+            "geometry": {
+                "type": "Point", 
+                "coordinates": [
+                    2.18333, 
+                    41.3833
+                ]
+            }, 
+            "type": "Feature", 
+            "properties": {
+                "text": "Waooo con dalmabaldez \ud83d\udc4c\ud83c\udffe @ Barcelona, Spain https://t.co/3stIVprgLG", 
+                "created_at": "Wed May 24 17:26:21 +0000 2017"
+            }
+        }, 
+        {
+            "geometry": {
+                "type": "Point", 
+                "coordinates": [
+                    106.5939065, 
+                    -6.1552524
+                ]
+            }, 
+            "type": "Feature", 
+            "properties": {
+                "text": "Usai Pemain, Giliran Fans Barcelona Dipermalukan Madrid https://t.co/9GTypNzaKj", 
+                "created_at": "Wed May 24 18:26:42 +0000 2017"
+            }
+        }, 
+        {
+            "geometry": {
+                "type": "Point", 
+                "coordinates": [
+                    2.15012988, 
+                    41.40660038
+                ]
+            }, 
+            "type": "Feature", 
+            "properties": {
+                "text": "I'm at Pla\u00e7a de Lesseps in Barcelona https://t.co/HMzDXMgPwl", 
+                "created_at": "Wed May 24 18:33:37 +0000 2017"
+            }
+        }, 
+        {
+            "geometry": {
+                "type": "Point", 
+                "coordinates": [
+                    2.105749, 
+                    41.384392
+                ]
+            }, 
+            "type": "Feature", 
+            "properties": {
+                "text": "Mujeres pasando la tarde. #barcelona #tree @ Parque de Cervantes https://t.co/gyFaTSJCY5", 
+                "created_at": "Wed May 24 18:34:01 +0000 2017"
+            }
+        }, 
+        {
+            "geometry": {
+                "type": "Point", 
+                "coordinates": [
+                    2.17426, 
+                    41.38045
+                ]
+            }, 
+            "type": "Feature", 
+            "properties": {
+                "text": "antpintura en la @naubostik #ba\u00f1os Arte urbano Barcelona #digerible #arteurbano #streetart\u2026 https://t.co/6xNi4e84PC", 
+                "created_at": "Wed May 24 18:34:01 +0000 2017"
+            }
+        }
+    ]
+}

@@ -1,7 +1,8 @@
 """ Simple HTTP request handler based on Python SimpleHTTPServer """
 
 #!/usr/bin/env python
-import SimpleHTTPServer # module merged in http.server in Py3.
+import SimpleHTTPServer
+# The SimpleHTTPServer module has been merged into http.server in Python 3.
 import SocketServer
 
 class MyRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler, object):
@@ -10,9 +11,7 @@ class MyRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler, object):
     # This class serves files from the current directory and below,
     # directly mapping the directory structure to HTTP requests.
 
-    #def __init__(self, request='/', client_address='0.0.0.0', server='0.0.0.0:8954'):
-
-    def __init__(self, request, client, server):
+    def __init__(self):
         """ Inherit the __init__ method from parent class """
         # to disable the Pylint message "Missing argument to super()
         # (missing-super-argument)" just add:
@@ -24,7 +23,7 @@ class MyRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler, object):
         # class to be inherited from, so the 'object''s methods aren't
         # found first. Inheriting from 'object' gives a new-style class,
         # MyRequestHandler, which works with super().
-        super(MyRequestHandler, self).__init__(request, client, server)
+        super(MyRequestHandler, self).__init__()
         self.path = ""
 
     def do_GET(self):
@@ -33,7 +32,7 @@ class MyRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler, object):
             self.path = '/ourService.html'
         return SimpleHTTPServer.SimpleHTTPRequestHandler.do_GET(self)
         # do_GET() request mapped to local file by interpreting request
-        # as path relative to current wd.
+        # as path relative to the current working directory.
         # If request was mapped to directory, directory is checked for
         # file named index.html or index.htm (in that order). If found,
         # file\'s contents are returned; otherwise a directory listing is
@@ -41,7 +40,7 @@ class MyRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler, object):
         # uses os.listdir() to scan the directory, and returns a 404 error
         # response if the listdir() fails.
 
-HANDLER = MyRequestHandler("/", '0.0.0.0', '0.0.0.0')
+HANDLER = MyRequestHandler()
 SERVER = SocketServer.TCPServer(('0.0.0.0', 8954), HANDLER)
 
 print 'Started my REST API on port 8954'
